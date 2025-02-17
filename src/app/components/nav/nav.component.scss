@@ -1,0 +1,25 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: 5%;
+  margin-right: 0;
+}

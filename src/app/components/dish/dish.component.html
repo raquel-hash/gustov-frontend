@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialog(null)"
+      class="add-button"
+    >
+      <mat-icon>add</mat-icon>
+      Agregar Plato
+    </button>
+  </div>
+  <table mat-table [dataSource]="dishes" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let dish">{{ dish.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Precio</th>
+      <td mat-cell *matCellDef="let dish">{{ dish.price }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Imagen</th>
+      <td mat-cell *matCellDef="let dish">
+        <img [src]="dish.imageUrl" alt="{{ dish.name }}" width="50" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="showInMenu">
+      <th mat-header-cell *matHeaderCellDef>Mostrar en Menú</th>
+      <td mat-cell *matCellDef="let dish">
+        {{ dish.showInMenu ? "Sí" : "No" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let dish">
+        <button mat-icon-button color="accent" (click)="editDish(dish)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteDish(dish.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

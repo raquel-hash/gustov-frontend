@@ -1,0 +1,41 @@
+<mat-card class="login-card">
+  <mat-card-title>Iniciar Sesión</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" id="username" />
+        <mat-error *ngIf="submitted && f['username'].errors">
+          <span *ngIf="f['username'].errors['required']"
+            >Usuario es requerido</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          id="password"
+        />
+        <mat-error *ngIf="submitted && f['password'].errors">
+          <span *ngIf="f['password'].errors['required']"
+            >Contraseña es requerido</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <div class="form-group">
+        <button mat-raised-button color="primary" [disabled]="loading">
+          Iniciar Sesión
+        </button>
+        <mat-progress-spinner
+          *ngIf="loading"
+          mode="indeterminate"
+          diameter="20"
+        ></mat-progress-spinner>
+      </div>
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    </form>
+  </mat-card-content>
+</mat-card>

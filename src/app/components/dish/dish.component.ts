@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Dish } from '../../models/dish';
+import { MenuService } from '../../services/menu.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,8 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Dish } from '../../models/dish';
-import { MenuService } from '../../services/menu.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DishFormComponent } from './dish-form/dish-form.component';
 
 @Component({
   selector: 'app-dish',
@@ -33,23 +32,22 @@ import { MenuService } from '../../services/menu.service';
     MatTableModule,
     MatIconModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatCheckboxModule,
   ],
   providers: [MenuService],
 })
 export class DishComponent implements OnInit {
   dishes: Dish[] = [];
-  displayedColumns: string[] = ['name', 'price', 'image', 'actions'];
-  dishForm: FormGroup;
-  isEditMode = false;
-  currentDishId: number | null = null;
+  displayedColumns: string[] = [
+    'name',
+    'price',
+    'image',
+    'showInMenu',
+    'actions',
+  ];
 
-  constructor(private menuService: MenuService, private fb: FormBuilder) {
-    this.dishForm = this.fb.group({
-      name: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(0)]],
-      imageUrl: ['', Validators.required], // Campo para la URL de la imagen
-    });
-  }
+  constructor(private menuService: MenuService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getDishes();
@@ -61,47 +59,26 @@ export class DishComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.dishForm.valid) {
-      if (this.isEditMode) {
-        // Editar plato existente
-        const updatedDish: Dish = {
-          id: this.currentDishId!,
-          ...this.dishForm.value,
-        };
-        this.menuService.updateDish(updatedDish).subscribe(() => {
-          this.getDishes();
-          this.resetForm();
-        });
-      } else {
-        // Agregar nuevo plato
-        this.menuService.addDish(this.dishForm.value).subscribe(() => {
-          this.getDishes();
-          this.resetForm();
-        });
+  openDialog(dish: Dish | null): void {
+    const dialogRef = this.dialog.open(DishFormComponent, {
+      width: '400px',
+      data: { dish },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getDishes();
       }
-    }
+    });
   }
 
   editDish(dish: Dish): void {
-    this.isEditMode = true;
-    this.currentDishId = dish.id;
-    this.dishForm.setValue({
-      name: dish.name,
-      price: dish.price,
-      imageUrl: dish.imageUrl,
-    });
+    this.openDialog(dish);
   }
 
   deleteDish(id: number): void {
     this.menuService.deleteDish(id).subscribe(() => {
       this.getDishes();
     });
-  }
-
-  resetForm(): void {
-    this.isEditMode = false;
-    this.currentDishId = null;
-    this.dishForm.reset();
   }
 }

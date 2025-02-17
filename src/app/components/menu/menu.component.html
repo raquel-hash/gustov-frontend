@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" position="end">
+    <app-sale [saleItems]="saleItems"></app-sale>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container">
+      <mat-card *ngFor="let dish of dishes" class="dish-card">
+        <mat-card-header>
+          <mat-card-title>{{ dish.name }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="dish.imageUrl" alt="{{ dish.name }}" />
+        <mat-card-content>
+          <p><b>Precio:</b> {{ dish.price | currency : "BOB" }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addToCart(dish)"
+            class="add-button"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

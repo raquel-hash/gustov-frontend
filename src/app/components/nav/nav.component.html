@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <div class="left-section">
+    <img src="assets/logo.png" alt="Gustov Logo" class="logo" />
+    <span class="navbar-brand">Gustov</span>
+    <button
+      *ngIf="currentUser"
+      mat-button
+      routerLink="/menu"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Menú
+    </button>
+    <button
+      *ngIf="currentUser"
+      mat-button
+      routerLink="/daily-sales-report"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Reporte Diario
+    </button>
+    <button
+      *ngIf="currentUser && currentUser.role === 'Admin'"
+      mat-button
+      routerLink="/dishes"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Platos
+    </button>
+  </div>
+  <span class="spacer"></span>
+  <button *ngIf="currentUser" mat-button (click)="logout()">
+    Cerrar Sesión
+  </button>
+</mat-toolbar>

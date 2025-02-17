@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="header">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha</mat-label>
+      <input
+        matInput
+        [formControl]="dateControl"
+        type="date"
+        (change)="getReport()"
+      />
+    </mat-form-field>
+
+    <div class="total-summary">
+      <b>Total del día:</b> {{ totalAmount | currency : "BOB" }}
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="sales" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let sale; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Cliente</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let sale">
+        {{ sale.totalAmount | currency : "BOB" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.date | date : "short" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="items">
+      <th mat-header-cell *matHeaderCellDef>Items</th>
+      <td mat-cell *matCellDef="let sale">
+        <ul>
+          <li
+            *ngFor="let item of sale.saleItems; let i = index"
+            [ngClass]="{
+              'multiple-items':
+                sale.saleItems.length > 1 && i !== sale.saleItems.length - 1
+            }"
+          >
+            <div>
+              <span class="dish-name">{{ item.dishName }}</span
+              ><br />
+              <span class="quantity"> {{ item.quantity }} x </span><br />
+              <span class="price">{{ item.price | currency : "BOB" }} =</span
+              ><br />
+              <span class="subtotal">{{
+                item.subtotal | currency : "BOB"
+              }}</span>
+            </div>
+          </li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
