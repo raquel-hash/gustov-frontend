@@ -1,6 +1,6 @@
-# Gustov Restaurant - Frontend
+# ![Gustov Restaurant](./src/assets/favicon.ico) Gustov Restaurant - Frontend
 
-![Gustov Restaurant](./assets/demo/cover.png)
+
 
 ## Descripción
 
@@ -8,33 +8,29 @@ Gustov Restaurant es una aplicación de frontend desarrollada en Angular para la
 
 ## Características
 
-- Visualización de menús
-- Gestión de reservas
-- Realización de pedidos
+- Visualización del menú
+- Gestión de platos
+- Realización de venta
 - Autenticación de usuarios
-- Panel de administración
+- Reporte diario
 
 ## Capturas de Pantalla
 
-### Página de Inicio
+### Página de Inicio de Sesión
 
-![Home Page](./assets/demo/home.png)
+![Home Page](./src/assets/demo/login.png)
 
 ### Menú
 
-![Menu](./assets/demo/menu.png)
+![Menu](./src/assets/demo/menu.png)
 
-### Reservas
+### Venta
 
-![Reservations](./assets/demo/reservations.png)
+![Sale](./src/assets/demo/sale.png)
 
-### Pedidos
+### ReporteDiario
 
-![Orders](./assets/demo/orders.png)
-
-### Panel de Administración
-
-![Admin Panel](./assets/demo/admin_panel.png)
+![Dayli Report](./src/assets/demo/dayli-report.png)
 
 ## Instalación
 
@@ -60,38 +56,10 @@ Para instalar y ejecutar este proyecto localmente, sigue estos pasos:
 Para ejecutar la aplicación en modo de desarrollo, usa el siguiente comando:
 
 ```sh
-npm start
+ng serve
 ```
 
 Esto iniciará el servidor de desarrollo y abrirá la aplicación en `http://localhost:4200/`.
-
-### Construcción
-
-Para construir la aplicación para producción, usa el siguiente comando:
-
-```sh
-npm run build
-```
-
-Los archivos de la aplicación se generarán en el directorio `dist/`.
-
-### Pruebas
-
-Para ejecutar las pruebas unitarias, usa el siguiente comando:
-
-```sh
-npm test
-```
-
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor sigue estos pasos:
-
-1. Haz un fork del proyecto
-2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`)
-3. Realiza tus cambios y haz commit (`git commit -am 'Agregar nueva característica'`)
-4. Haz push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Abre un Pull Request
 
 ## Licencia
 
