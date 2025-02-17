@@ -24,6 +24,10 @@ Gustov Restaurant es una aplicación de frontend desarrollada en Angular para la
 
 ![Menu](./src/assets/demo/menu.png)
 
+### Gestión de platos
+
+![Dish](./src/assets/demo/dish.png)
+
 ### Venta
 
 ![Sale](./src/assets/demo/sale.png)
