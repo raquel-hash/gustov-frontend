@@ -1,0 +1,22 @@
+.container {
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+}
+
+.add-button mat-icon {
+  margin-right: 5px;
+}
+
+table {
+  width: 100%;
+}

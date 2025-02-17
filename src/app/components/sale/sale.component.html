@@ -1,0 +1,80 @@
+<div class="container">
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>Nombre del Cliente</mat-label>
+    <input
+      matInput
+      [(ngModel)]="customerName"
+      placeholder="Ingrese el nombre"
+    />
+  </mat-form-field>
+  <span *ngIf="customerNameError" style="color: #f44336">{{
+    customerNameError
+  }}</span>
+
+  <table mat-table [dataSource]="saleItems" class="mat-elevation-z8">
+    <ng-container matColumnDef="dishName">
+      <th mat-header-cell *matHeaderCellDef class="dish-name-column">Plato</th>
+      <td mat-cell *matCellDef="let item">{{ item.dishName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef class="quantity-column">
+        Cantidad
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let item; let i = index"
+        class="quantity-column"
+      >
+        <mat-form-field appearance="outline" style="width: 80px">
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="item.quantity"
+            (change)="onQuantityChange(i, $event)"
+            min="1"
+            max="999"
+          />
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef class="subtotal-column">
+        Subtotal
+      </th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.price | currency : "BOB" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subtotal">
+      <th mat-header-cell *matHeaderCellDef class="price-subtotal">Subtotal</th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.subtotal | currency : "BOB" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let item; let i = index">
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div class="total-container">
+    <h3><b>Total a Pagar:</b> {{ totalAmount | currency : "BOB" }}</h3>
+  </div>
+
+  <div class="checkout">
+    <button mat-raised-button color="primary" (click)="checkout()">
+      Realizar Venta
+    </button>
+  </div>
+</div>
