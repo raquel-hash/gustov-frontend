@@ -4,7 +4,7 @@
 
 ## Descripción
 
-Gustov Restaurant es una aplicación de frontend desarrollada en Angular para la gestión y visualización de menús, reservas, y pedidos en un restaurante. Esta aplicación proporciona una interfaz de usuario intuitiva y responsiva para mejorar la experiencia tanto de los clientes como del personal del restaurante.
+Gustov Restaurant es una aplicación de frontend desarrollada en Angular para la gestión y visualización del menú, ventas, administración de platos y reporte diario de un restaurante.
 
 ## Características
 
