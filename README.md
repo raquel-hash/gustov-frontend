@@ -1,4 +1,4 @@
-# ![Gustov Restaurant](./src/assets/favicon.ico) Gustov Restaurant - Frontend
+# ![Gustov Restaurant](./src/favicon.ico) Gustov Restaurant - Frontend
 
 
 
